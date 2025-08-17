@@ -80,5 +80,6 @@
 }
 
 .nav-dark {
-    background: #141414;
+    background: #333;
+    height: 75px;
 }
