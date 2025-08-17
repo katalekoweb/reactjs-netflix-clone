@@ -3,6 +3,7 @@ import './Login.css'
 import logo from '../../assets/logo.png'
 import { login, signup } from '../../firebase'
 import { Link } from 'react-router-dom'
+import netflix_spinner from '../../assets/netflix_spinner.gif'
 
 const Login = () => {
 
@@ -10,18 +11,25 @@ const Login = () => {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [loading, setLoading] = useState(false)
 
   const user_auth = async (event) => {
     event.preventDefault();
+
+    setLoading(true)
 
     if (signState === "Sign In") {
       await login(email, password)
     } else {
       signup(name, email, password)
     }
+
+    setLoading(false)
   }
 
   return (
+
+    loading ? <div className="login-spinner"> <img src={netflix_spinner} alt="" /> </div> : 
     <div className='login'>
       <Link to={'/'}>
           <img src={logo} className='login-logo' alt="" />
@@ -62,6 +70,7 @@ const Login = () => {
         
       </div>
     </div>
+    
   )
 }
 
